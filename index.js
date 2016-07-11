@@ -426,10 +426,10 @@ RedisSMQ = (function(superClass) {
           _this._handleError(cb, "messageNotString");
           return;
         }
-        if (options.message.length > q.maxsize) {
+        /*if (options.message.length > q.maxsize) {
           _this._handleError(cb, "messageTooLong");
           return;
-        }
+        }*/
         mc = [["zadd", "" + _this.redisns + options.qname, q.ts + options.delay * 1000, q.uid], ["hset", "" + _this.redisns + options.qname + ":Q", q.uid, options.message], ["hincrby", "" + _this.redisns + options.qname + ":Q", "totalsent", 1]];
         _this.redis.multi(mc).exec(function(err, resp) {
           if (err) {

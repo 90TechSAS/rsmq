@@ -482,9 +482,11 @@ class RedisSMQ extends EventEmitter
 			if typeof options.message isnt "string"
 				@_handleError(cb, "messageNotString")
 				return
+			###
 			if options.message.length > q.maxsize
 				@_handleError(cb, "messageTooLong")
 				return
+			###
 
 			# Ready to store the message
 			mc = [
